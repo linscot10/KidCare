@@ -70,13 +70,14 @@ display: flex;
 
 /* Navigation Links */
 .nav-links {
+  width: 400px;
   display: flex;
   list-style: none;
   gap: 1rem;
   align-items: center;
   justify-content: center;
   display: flex;
-  margin-right: 20rem;
+  margin-right: 1rem;
   height: 40px;
   font-size: 1.2rem;
 }
@@ -104,7 +105,12 @@ display: flex;
   justify-content:center;
   align-items:center;
   margin-right:5rem;
+  width: 100px;
 }
+button{
+  margin: 1rem;
+}
+
 
 /* Mobile Styles */
 @media (max-width: 768px) {
