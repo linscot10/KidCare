@@ -1,30 +1,35 @@
 <script setup>
 import {ref} from 'vue'
 
-const isOpen= ref(false)
+const showMobileMenu= ref(false)
 
-const toggleMenu =()=>{
-    isOpen.value=!isOpen.value
+const showMenu =()=>{
+    showMobileMenu.value=!showMobileMenu.value
 }
 
 const closeMenu=()=>{
-    isOpen.value=false
+    showMobileMenu.value=false
 }
 </script>
 
 <template>
   <header>
-     <div class="logo">
+  <i 
+class="fas fa-bars" 
+@click="showMenu()"> 
+</i>
+    
+      <nav class="navbar" :class="showMobileMenu ? 'open-menu' : 'closed-menu'">
+         <div class="logo">
                 <router-link to="/">
                 <svg width="200" height="50" xmlns="http://www.w3.org/2000/svg">
               <text x="0" y="50" font-size="30" font-family="Arial" fill="#fff">KidCare</text>
              </svg></router-link>
  <small>Your Partner in Reliable Childcare Access</small>
             </div>
-      <nav class="navbar">
         <div class="container">
-            <ul :class="{ 'nav-links': true, 'open': isOpen }">
-                <li><router-link to="/" @click="closeMenu">Home</router-link></li>
+            <ul :class="{ 'nav-links': true }">
+                <li><router-link to="/" @click="closeMenu" >Home</router-link></li>
                 <li><router-link to="/about" @click="closeMenu">About</router-link></li>
                 <li><router-link to="/daycares" @click="closeMenu"> Available Daycares</router-link></li>
                 <li><router-link to="/services" @click="closeMenu">Services</router-link></li>
@@ -53,7 +58,6 @@ text:hover {
 }
 
 header{
-  padding: 1.25rem 10%;
    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 background-color: green;
 padding: 1rem;
@@ -62,18 +66,21 @@ padding: 1rem;
    top: 0;
   left: 0;
   width: 100%;
-display: flex;
-  align-items: center;
-   padding: 0 1.25rem;
-  height: 6rem;
+/*display: flex;*/
+ flex-direction: column; 
+ align-items: stretch;
+  /*align-items: center;*/
+  height: auto;
   z-index: 1000;
+
 }
 .navbar {
    display: flex;
       gap: 1.563rem;
       align-items: center;
-      margin-right: 10px;
-      margin-left: 10px;
+      margin-right: 0.625rem;
+      margin-left: 0.625rem;
+        transition: all 0.3s ease;
  
 }
 
@@ -82,7 +89,7 @@ display: flex;
   justify-content: space-between;
  align-items: center;
  width: 100%;
- height: 4rem;
+ height: auto;
 }
 
 /* Logo */
@@ -94,6 +101,7 @@ display: flex;
   
 }
 .logo{
+   white-space: nowrap;
   display: flex;
   flex-direction: column;
   margin: 2.5rem;
@@ -110,7 +118,7 @@ display: flex;
   align-items: center;
   justify-content: center;
   display: flex;
-  height: 2.5rem;
+  /*height: 2.5rem;*/
   font-size: 1.2rem;
 }
 
@@ -124,65 +132,130 @@ display: flex;
 
 .nav-links li a:hover {
   color: #1e90ff;
+  
 }
 
 
-.btns,button{
+.btns{
   display:flex;  
- margin-left:2.5rem;
-      padding: .5rem 1rem;
-      border: none;
-      cursor: pointer;
-      border-radius: 0.3;
+ margin-left:8rem;
+      padding: .5rem 1rem;      
       font-weight: 600;
-}
-button{
-  margin: rem;
+      margin-right:0.8rem;
+     
 }
 
+button{
+  margin-right:0.8rem;
+  color: white;
+  margin: 1.7rem;
+  background-color: yellowgreen;
+  color: white;
+   border-radius: 0.3rem;
+   cursor: pointer;
+    border: none;
+     transition: 0.2s;
+}
+
+button a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+button:hover{
+ opacity: 0.5;
+ color: #FFF;
+}
+
+i{
+  display: none;
+    font-size: 1.5rem;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-bottom: 1rem;
+}
 
 /* Mobile Styles */
 
-/*
+
 @media (max-width: 768px) {
-    .navbar{
-        width: 100%;
-        height:100%;
-        display: block;
-    }
-    .container{
-    flex-direction: column;
-    align-items: flex-start;
-    padding-top: 3.75rem;
-    }
 
-  .menu-icon {
-    display: block;
-    position: absolute;
-    top: 1.125rem;
-    right: 1.25rem;  }
-
-  .nav-links {
-    flex-direction: column;
-    position: absolute;
-    top: 3.75;
-    left: 0;
-    width: 100%;
-    background-color: #333;
-    transform: translateY(-100%);
-    transition: transform 0.3s ease;
+  header{
     padding: 1rem;
-  }
-  .nav-links.open {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
+    position: fixed;
+width: 100%;
+height: auto;
+
   }
 
-   .nav-links li {
-    margin-bottom: 0.5rem 0;
+  .open-menu {
+opacity: 1;
+/*height: auto;*/
+ overflow: visible;
+    display: flex;
+    max-height: 1000px;
+}
+
+.closed-menu {
+  display:none;
+opacity: 0;
+height: 0;
+padding: 0;
+overflow: hidden;
+  transition: all 0.3s ease;
+}
+.navbar{
+  flex-direction: column;
+  z-index: 100;
+  position: relative;
+  transition: all 0.2s ease-out;
+  padding: 0 1rem;
+  width: 100%;
+  height: auto;
+}
+
+.nav-links{
+  flex-direction: column;
+  font-size: 0.5rem;
+  margin-top: 0;
+
+}
+i{
+  display: block;
+   text-align: right;
+   padding: 0 0.625rem 0 0.625rem;
+}
+   
+    .container{
+      width: 100%;
+    flex-direction: column;
+    height: auto;
+    margin-right: 100px;
+    
     }
-} */
+.logo{
+  padding:0;
+  margin-left: 100px;
+  width: 100%;
+
+}
+
+  
+ 
+  .btns{
+    flex-direction: column;
+    width:100%;
+    margin-left: 170px;
+   
+   }
+   button{
+    width:50%;
+    margin: 0.625rem;
+    margin-left: 5rem;
+   
+   }
+} 
 
 
 
