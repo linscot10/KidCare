@@ -142,10 +142,13 @@ padding: 1rem;
       padding: .5rem 1rem;      
       font-weight: 600;
       margin-right:0.8rem;
+   
      
 }
 
 button{
+     width: 6rem;
+     height: 2.5rem;
   margin-right:0.8rem;
   color: white;
   margin: 1.7rem;
@@ -186,6 +189,7 @@ i{
     position: fixed;
 width: 100%;
 height: auto;
+ transition: transform 1s ease-in-out;
 
   }
 
