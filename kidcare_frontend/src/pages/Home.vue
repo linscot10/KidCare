@@ -1,9 +1,37 @@
 <script setup>
+import {ref} from 'vue'
+import {useIntersectionObserver} from '@vueuse/core'
 import Navbar from '../components/Navbar.vue';
+
+
+const el= ref(null)
+const isVisible=ref(false)
+
+  useIntersectionObserver(
+  el,
+  ([{isIntersecting,intersectionRatio}])=>{
+    if(intersectionRatio>0.5){
+      isVisible.value=true
+    }else{
+      isVisible.value=false
+    }
+  },
+  {
+    threshold:[0,0.5,1]
+  }
+)
+
+
 </script>
 <template>
     <Navbar/>
-    <div class="container">
+    <div
+     ref="el" 
+     :class="[
+      'container',
+       'fade-slide',
+      isVisible ? 'fade-in' : 'fade-out']" >
+     
         <div class="hero">
             <h1>Revolutionizing Childcare access</h1>
             <p>Affordable, high-quality childcare for every family—anytime, anywhere. We're making access simple, inclusive, and community-powered.</p>
@@ -26,11 +54,32 @@ import Navbar from '../components/Navbar.vue';
               
         </div>
     </div>
-    <div class="features">
+
+
+    
+
+    <div   class="features">
+   
+
       
     </div>
 </template>
 <style scoped>
+.fade-slide {
+  transition: all 0.7s ease-out;
+  transform: translateY(2rem);
+  opacity: 0;
+}
+
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-out {
+  opacity: 0;
+  transform: translateY(2rem);
+}
 .container{
 display:flex;
 justify-content:center;
