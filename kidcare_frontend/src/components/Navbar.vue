@@ -1,7 +1,24 @@
 <script setup>
-import {ref} from 'vue'
+import {ref ,onMounted,onUnmounted} from 'vue'
 
 const showMobileMenu= ref(false)
+const showNavbar = ref(true)
+const lastScrollPosition=ref(0)
+
+
+const handleScroll =()=>{
+    const currentScroll = window.scrollY
+    showNavbar.value=currentScroll<lastScrollPosition.value
+    lastScrollPosition.value=currentScroll
+}
+
+onMounted(() => {
+    window.addEventListener('scroll',handleScroll)
+})
+
+onUnmounted(()=>{
+    window.removeEventListener('scroll', handleScroll)
+})
 
 const showMenu =()=>{
     showMobileMenu.value=!showMobileMenu.value
@@ -13,11 +30,11 @@ const closeMenu=()=>{
 </script>
 
 <template>
-  <header>
+  <header :class="{'nav--hidden': !showNavbar}">
   <i 
-class="fas fa-bars" 
-@click="showMenu()"> 
-</i>
+  class="fas fa-bars" 
+   @click="showMenu()"> 
+  </i>
     
       <nav class="navbar" :class="showMobileMenu ? 'open-menu' : 'closed-menu'">
          <div class="logo">
@@ -72,7 +89,13 @@ padding: 1rem;
   /*align-items: center;*/
   height: auto;
   z-index: 1000;
+   transform: translate3d(0, 0, 0);
+  transition: 0.1s all ease-out;
 
+}
+.nav--hidden{
+ box-shadow: none;
+  transform: translate3d(0, -100%, 0);
 }
 .navbar {
    display: flex;
