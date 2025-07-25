@@ -2,6 +2,7 @@
 import {ref} from 'vue'
 import {useIntersectionObserver} from '@vueuse/core'
 import Navbar from '../components/Navbar.vue';
+import Features from '../components/Features.vue'
 
 
 const el= ref(null)
@@ -24,6 +25,7 @@ const isVisible=ref(false)
 
 </script>
 <template>
+  
     <Navbar/>
     <div
      ref="el" 
@@ -54,15 +56,12 @@ const isVisible=ref(false)
               
         </div>
     </div>
+    <Features/>
 
 
     
 
-    <div   class="features">
    
-
-      
-    </div>
 </template>
 <style scoped>
 .fade-slide {
@@ -81,10 +80,12 @@ const isVisible=ref(false)
   transform: translateY(2rem);
 }
 .container{
+  padding-top: 130px;
 display:flex;
 justify-content:center;
 align-items:center;
 width:100%;
+background-color: rgb(201, 219, 238);
 
 }
 .hero{
