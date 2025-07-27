@@ -1,10 +1,10 @@
 <script setup>
 import {ref} from 'vue'
 import {useIntersectionObserver} from '@vueuse/core'
-import Navbar from '../components/Navbar.vue';
-import Features from '../components/Features.vue'
-
-
+import Navbar from '../components/home/Navbar.vue';
+import Features from '../components/home/Features.vue'
+import Process from '../components/home/Process.vue'
+import Testimonials from '../components/home/Testimonials.vue'
 const el= ref(null)
 const isVisible=ref(false)
 
@@ -57,6 +57,8 @@ const isVisible=ref(false)
         </div>
     </div>
     <Features/>
+    <Process/>
+    <Testimonials/>
 
 
     

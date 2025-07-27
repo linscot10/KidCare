@@ -89,6 +89,7 @@
 
 
 .cards{
+    margin:0;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -96,6 +97,7 @@
 
 }
 .card{
+    width:100%;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -104,7 +106,7 @@
     width:30%;
     height:80%;
     padding:1rem;
-    margin:1rem;
+    margin:2rem;
     border-radius:0.8rem;
     transition: transform 0.3s ease;
       
