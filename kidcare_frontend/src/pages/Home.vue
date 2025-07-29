@@ -5,6 +5,7 @@ import Navbar from '../components/home/Navbar.vue';
 import Features from '../components/home/Features.vue'
 import Process from '../components/home/Process.vue'
 import Testimonials from '../components/home/Testimonials.vue'
+import Footer from '../components/home/Footer.vue'
 const el= ref(null)
 const isVisible=ref(false)
 
@@ -59,6 +60,7 @@ const isVisible=ref(false)
     <Features/>
     <Process/>
     <Testimonials/>
+    <Footer/>
 
 
     
